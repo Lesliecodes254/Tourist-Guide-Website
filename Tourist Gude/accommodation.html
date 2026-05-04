@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Accommodation — Kenya Tourist Guide</title>
+  <style>
+/* ===========================
+   CSS VARIABLES - Green & White Theme
+   =========================== */
+:root {
+  --primary: #1a6b3c;
+  --primary-dark: #0f4526;
+  --primary-light: #2d9e5f;
+  --accent: #4cc97a;
+  --accent-soft: #a8e6c1;
+  --white: #ffffff;
+  --off-white: #f4faf7;
+  --text-dark: #0d2b1a;
+  --text-mid: #2e5e42;
+  --text-light: #6aab86;
+  --border: #c2e8d2;
+  --shadow: rgba(26, 107, 60, 0.15);
+  --shadow-strong: rgba(26, 107, 60, 0.3);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Lato', 'Trebuchet MS', sans-serif;
+  --radius: 12px;
+  --transition: 0.3s ease;
+}
+
+/* ===========================
+   RESET & BASE
+   =========================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--off-white);
+  color: var(--text-dark);
+  line-height: 1.7;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+}
+
+/* ===========================
+   NAVIGATION — FLEXBOX
+   =========================== */
+nav {
+  background: var(--primary-dark);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 20px var(--shadow-strong);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 68px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.5px;
+}
+
+.nav-logo span {
+  color: var(--accent);
+}
+
+.nav-logo .logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--accent-soft);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background var(--transition), color var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background: var(--primary-light);
+  color: var(--white);
+}
+
+/* ===========================
+   HEADER / HERO
+   =========================== */
+.page-hero {
+  position: relative;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: var(--primary-dark);
+}
+
+.page-hero .hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.45;
+  transition: transform 0.6s ease;
+}
+
+.page-hero:hover .hero-bg { transform: scale(1.03); }
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: var(--white);
+  padding: 2rem;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  margin-bottom: 0.75rem;
+}
+
+.hero-content p {
+  font-size: 1.15rem;
+  color: var(--accent-soft);
+  max-width: 520px;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+}
+
+.hero-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--primary-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 0.35rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+/* ===========================
+   HOMEPAGE — ATTRACTION CARDS (CSS GRID)
+   =========================== */
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  color: var(--text-light);
+  font-size: 1.05rem;
+  margin-bottom: 2.5rem;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--accent);
+  margin-top: 0.5rem;
+  border-radius: 2px;
+}
+
+/* CSS Grid for attraction cards */
+.attractions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.75rem;
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 4px 20px var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+  border: 1px solid var(--border);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 36px var(--shadow-strong);
+}
+
+.card-img {
+  height: 200px;
+  background: var(--primary-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+}
+
+.card-tag {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: var(--accent);
+  color: var(--primary-dark);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.25rem 0.7rem;
+  border-radius: 20px;
+}
+
+.card-body {
+  padding: 1.4rem;
+}
+
+.card-body h3 {
+  font-size: 1.2rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+}
+
+.card-body p {
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+/* ===========================
+   TWO-COLUMN GRID (inner pages)
+   =========================== */
+.two-col-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+
+.two-col-grid.reverse {
+  direction: rtl;
+}
+
+.two-col-grid.reverse > * {
+  direction: ltr;
+}
+
+.col-image {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 8px 32px var(--shadow-strong);
+  aspect-ratio: 4/3;
+  background: var(--primary-light);
+}
+
+.col-image-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  background: linear-gradient(135deg, var(--primary-light), var(--accent));
+}
+
+.col-text {
+  padding: 1rem 0;
+}
+
+.col-text h2 {
+  font-size: 1.8rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+.col-text p {
+  color: var(--text-mid);
+  margin-bottom: 1rem;
+}
+
+.info-list {
+  list-style: none;
+  margin-top: 1.25rem;
+}
+
+.info-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.92rem;
+  color: var(--text-mid);
+}
+
+.info-list li:last-child { border-bottom: none; }
+
+.info-icon {
+  color: var(--accent);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+/* ===========================
+   PHOTO GALLERY (CSS GRID)
+   =========================== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  gap: 0.75rem;
+}
+
+.gallery-item {
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--primary-light);
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px var(--shadow-strong);
+  z-index: 2;
+  position: relative;
+}
+
+.gallery-item-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 2.5rem;
+  color: var(--white);
+}
+
+.gallery-item-placeholder span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.85;
+}
+
+/* Varying grid spans for visual interest */
+.gallery-item:nth-child(1) {
+  grid-column: span 2;
+  grid-row: span 2;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+}
+.gallery-item:nth-child(2) { background: linear-gradient(135deg, var(--primary-light), var(--accent)); }
+.gallery-item:nth-child(3) { background: linear-gradient(135deg, #2a7d50, var(--primary-light)); }
+.gallery-item:nth-child(4) { background: linear-gradient(135deg, var(--primary), #3aaf6a); }
+.gallery-item:nth-child(5) { background: linear-gradient(135deg, var(--accent), #2d9e5f); }
+.gallery-item:nth-child(6) {
+  grid-column: span 2;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+}
+.gallery-item:nth-child(7) { background: linear-gradient(135deg, var(--primary-light), var(--primary)); }
+.gallery-item:nth-child(8) { background: linear-gradient(135deg, #1d7a45, var(--accent)); }
+.gallery-item:nth-child(9) { background: linear-gradient(135deg, var(--primary), #44c273); }
+.gallery-item:nth-child(10) {
+  grid-column: span 2;
+  background: linear-gradient(135deg, var(--accent), var(--primary-dark));
+}
+.gallery-item:nth-child(11) { background: linear-gradient(135deg, var(--primary-dark), #2d9e5f); }
+.gallery-item:nth-child(12) { background: linear-gradient(135deg, var(--primary-light), var(--primary-dark)); }
+.gallery-item:nth-child(13) { background: linear-gradient(135deg, #2a7d50, var(--accent)); }
+.gallery-item:nth-child(14) { background: linear-gradient(135deg, var(--primary), var(--accent)); }
+.gallery-item:nth-child(15) { background: linear-gradient(135deg, var(--accent), var(--primary)); }
+.gallery-item:nth-child(16) { background: linear-gradient(135deg, var(--primary-dark), #3aaf6a); }
+.gallery-item:nth-child(17) { background: linear-gradient(135deg, #1d7a45, var(--primary-light)); }
+.gallery-item:nth-child(18) { background: linear-gradient(135deg, var(--primary-light), var(--primary-dark)); }
+.gallery-item:nth-child(19) { background: linear-gradient(135deg, var(--accent), #2a7d50); }
+.gallery-item:nth-child(20) { background: linear-gradient(135deg, var(--primary), var(--primary-light)); }
+
+/* ===========================
+   CONTACT FORM
+   =========================== */
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.contact-info h2 {
+  font-size: 2rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+.contact-info p {
+  color: var(--text-mid);
+  margin-bottom: 2rem;
+}
+
+.contact-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.contact-detail-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--accent-soft);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  color: var(--primary-dark);
+}
+
+.contact-detail-text strong {
+  display: block;
+  color: var(--primary-dark);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.2rem;
+}
+
+.contact-detail-text span {
+  color: var(--text-mid);
+  font-size: 0.95rem;
+}
+
+/* Form */
+.contact-form-box {
+  background: var(--white);
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 32px var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.contact-form-box h3 {
+  font-size: 1.5rem;
+  color: var(--primary-dark);
+  margin-bottom: 1.75rem;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  background: var(--off-white);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(45, 158, 95, 0.15);
+  background: var(--white);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 1rem;
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  margin-top: 0.5rem;
+}
+
+.btn-submit:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* ===========================
+   HOMEPAGE BANNER STATS
+   =========================== */
+.stats-bar {
+  background: var(--primary);
+  color: var(--white);
+  padding: 2.5rem 2rem;
+}
+
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--accent-soft);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.25rem;
+}
+
+/* ===========================
+   FOOTER
+   =========================== */
+footer {
+  background: var(--primary-dark);
+  color: var(--accent-soft);
+  padding: 3rem 2rem 1.5rem;
+  margin-top: 4rem;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.footer-brand p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-top: 0.75rem;
+  line-height: 1.7;
+}
+
+.footer-col h4 {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-col ul li a {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  transition: color var(--transition);
+}
+
+.footer-col ul li a:hover { color: var(--accent); }
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 1.25rem;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-light);
+}
+
+/* ===========================
+   UTILITY
+   =========================== */
+.bg-green-light {
+  background: var(--accent-soft);
+}
+
+.page-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.chip {
+  display: inline-block;
+  background: var(--accent-soft);
+  color: var(--primary-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.3rem 0.85rem;
+  border-radius: 20px;
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .two-col-grid,
+  .contact-wrapper,
+  .footer-inner { grid-template-columns: 1fr; }
+
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .gallery-item:nth-child(1),
+  .gallery-item:nth-child(6),
+  .gallery-item:nth-child(10) {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+
+  .nav-links { display: none; }
+}
+
+/* ===========================
+   IMAGE SLOTS
+   =========================== */
+.img-slot {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, #1a6b3c, #2d9e5f);
+  border: 3px dashed #4cc97a;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.img-slot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.img-slot .slot-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  z-index: 1;
+  pointer-events: none;
+}
+.img-slot .slot-icon { font-size: 2rem; }
+.img-slot .slot-text {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #a8e6c1;
+  background: rgba(15,69,38,0.7);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+}
+.img-slot .slot-name {
+  font-size: 0.65rem;
+  color: #4cc97a;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.gallery-img-slot {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border: 2px dashed rgba(76,201,122,0.6);
+  position: relative;
+  overflow: hidden;
+  color: #a8e6c1;
+}
+.gallery-img-slot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.gallery-img-slot .slot-label {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  pointer-events: none;
+}
+.gallery-img-slot .slot-icon { font-size: 1.8rem; }
+.gallery-img-slot .slot-text {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #a8e6c1;
+  background: rgba(15,69,38,0.75);
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+}
+.gallery-img-slot .slot-name { font-size: 0.6rem; color: #4cc97a; }
+
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <div class="logo-icon">🇰🇪</div>
+        <span>Kenya<span>Guide</span></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="attractions.html" >Attractions</a></li>
+        <li><a href="food.html" >Food & Dining</a></li>
+        <li><a href="accommodation.html" class="active">Stay</a></li>
+        <li><a href="gallery.html" >Gallery</a></li>
+        <li><a href="contact.html" >Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600');"></div>
+    <div class="hero-content">
+      <div class="hero-badge">Rest in Kenya</div>
+      <h1>Where to Stay</h1>
+      <p>From luxury tented camps on the Mara plains to boutique coastal retreats — Kenya offers stays as spectacular as its scenery.</p>
+    </div>
+  </header>
+
+  <div class="page-wrap">
+
+    <div class="two-col-grid">
+      <div class="col-image">
+        <div class="img-slot" style="min-height:280px;">
+        <!-- ADD YOUR IMAGE: change src="" to src="images/angama-mara.jpg" -->
+        <img src="/images/Angama.jpg" alt="Angama Mara, Maasai Mara" style="display:none;" onload="this.style.display='block';this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"/>
+        <div class="slot-label">
+          <span class="slot-icon">📷</span>
+          <span class="slot-text">Add Image Here</span>
+          <span class="slot-name">Angama Mara, Maasai Mara</span>
+          <span class="slot-name" style="font-size:0.55rem;opacity:0.7;">src="images/angama-mara.jpg"</span>
+        </div>
+      </div>
+      </div>
+      <div class="col-text">
+        <div class="chip">Luxury Safari Lodge</div>
+        <h2>Angama Mara, Maasai Mara</h2>
+        <p>Perched on the edge of the Great Rift Valley escarpment 500 metres above the Maasai Mara, Angama Mara is consistently ranked among Africa's finest safari lodges. Its 30 tented suites offer sweeping 180° views across the plains below.</p>
+        <p>Inspired by the film <em>Out of Africa</em>, the lodge features a full spa, photography studio, Maasai cultural experiences, and twice-daily game drives into the reserve. All meals and activities are included.</p>
+        <ul class="info-list">
+          <li><span class="info-icon">📍</span> Oloololo Escarpment, Maasai Mara</li>
+          <li><span class="info-icon">💰</span> From $1,200 per person per night (full board)</li>
+          <li><span class="info-icon">⭐</span> Rating: 5-star &nbsp;·&nbsp; Condé Nast Top 10 Africa</li>
+          <li><span class="info-icon">📞</span> reservations@angama.com</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="two-col-grid">
+      <div class="col-image">
+        <div class="img-slot" style="min-height:280px;">
+        <!-- ADD YOUR IMAGE: change src="" to src="images/sarova-whitesands.jpg" -->
+        <img src="/images/Sarova.jpg" alt="Sarova Whitesands, Mombasa" style="display:none;" onload="this.style.display='block';this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"/>
+        <div class="slot-label">
+          <span class="slot-icon">📷</span>
+          <span class="slot-text">Add Image Here</span>
+          <span class="slot-name">Sarova Whitesands, Mombasa</span>
+          <span class="slot-name" style="font-size:0.55rem;opacity:0.7;">src="images/sarova-whitesands.jpg"</span>
+        </div>
+      </div>
+      </div>
+      <div class="col-text">
+        <div class="chip">Beach Resort</div>
+        <h2>Sarova Whitesands Beach Resort, Mombasa</h2>
+        <p>Set on the pristine white sands of Bamburi Beach north of Mombasa, Sarova Whitesands is one of Kenya's most beloved coastal resorts. The expansive property features five swimming pools, multiple restaurants, a full water sports centre, and lush tropical gardens.</p>
+        <p>The resort is ideal for families, with a dedicated kids' club, shallow pools, and a wide beach perfect for water activities. Dhow sunset cruises depart from the resort's beach every evening.</p>
+        <ul class="info-list">
+          <li><span class="info-icon">📍</span> Bamburi Beach, Mombasa North Coast</li>
+          <li><span class="info-icon">💰</span> From KSh 18,000 per room per night</li>
+          <li><span class="info-icon">⭐</span> Rating: 4-star &nbsp;·&nbsp; TripAdvisor: 4.5/5</li>
+          <li><span class="info-icon">📞</span> +254 041 548 5000</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="two-col-grid">
+      <div class="col-image">
+        <div class="img-slot" style="min-height:280px;">
+        <!-- ADD YOUR IMAGE: change src="" to src="images/tribe-hotel.jpg" -->
+        <img src="/images/Tribe.jpg" alt="Tribe Hotel, Nairobi" style="display:none;" onload="this.style.display='block';this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"/>
+        <div class="slot-label">
+          <span class="slot-icon">📷</span>
+          <span class="slot-text">Add Image Here</span>
+          <span class="slot-name">Tribe Hotel, Nairobi</span>
+          <span class="slot-name" style="font-size:0.55rem;opacity:0.7;">src="images/tribe-hotel.jpg"</span>
+        </div>
+      </div>
+      </div>
+      <div class="col-text">
+        <div class="chip">Boutique City Hotel</div>
+        <h2>Tribe Hotel, Nairobi</h2>
+        <p>A design-led boutique hotel in the upscale Village Market precinct in Gigiri, Tribe Hotel blends African art and craftsmanship with contemporary luxury. Each of the 137 rooms is uniquely decorated with African artwork and handcrafted furniture.</p>
+        <p>The award-winning The Market restaurant serves innovative Kenyan-influenced cuisine, while the rooftop pool and spa offer a serene escape from the city. Close to the UN complex and Safari Park Hotel.</p>
+        <ul class="info-list">
+          <li><span class="info-icon">📍</span> Village Market, Gigiri, Nairobi</li>
+          <li><span class="info-icon">💰</span> From KSh 22,000 per room per night</li>
+          <li><span class="info-icon">⭐</span> Rating: 5-star boutique &nbsp;·&nbsp; Loved on TripAdvisor</li>
+          <li><span class="info-icon">📞</span> +254 020 720 0000</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="two-col-grid">
+      <div class="col-image">
+        <div class="img-slot" style="min-height:280px;">
+        <!-- ADD YOUR IMAGE: change src="" to src="images/wildebeest-camp.jpg" -->
+        <img src="/images/Wildebeest.jpg" alt="Wildebeest Eco Camp, Nairobi" style="display:none;" onload="this.style.display='block';this.nextElementSibling.style.display='none'" onerror="this.style.display='none'"/>
+        <div class="slot-label">
+          <span class="slot-icon">📷</span>
+          <span class="slot-text">Add Image Here</span>
+          <span class="slot-name">Wildebeest Eco Camp, Nairobi</span>
+          <span class="slot-name" style="font-size:0.55rem;opacity:0.7;">src="images/wildebeest-camp.jpg"</span>
+        </div>
+      </div>
+      </div>
+      <div class="col-text">
+        <div class="chip">Budget-Friendly</div>
+        <h2>Wildebeest Eco Camp, Nairobi</h2>
+        <p>A firm favourite among backpackers and budget travellers, Wildebeest Eco Camp offers a beautiful, eco-conscious stay in a lush garden setting in Kibera, Nairobi. Options range from dormitory bunks to private bandas (cottages) and camping pitches.</p>
+        <p>The communal fire pit, on-site bar, solar power, and rainwater harvesting give it a genuine eco feel. Staff are incredibly helpful with organising onward safari bookings to all major parks.</p>
+        <ul class="info-list">
+          <li><span class="info-icon">📍</span> Kibera Drive, Nairobi</li>
+          <li><span class="info-icon">💰</span> Dorms from KSh 1,500 &nbsp;|&nbsp; Bandas from KSh 5,000</li>
+          <li><span class="info-icon">⭐</span> Hostelworld: 9.1/10 — Exceptional</li>
+          <li><span class="info-icon">📞</span> +254 020 261 8051</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:0.75rem;">
+          <div class="logo-icon">🇰🇪</div>
+          <span style="color:var(--white);">Kenya<span style="color:var(--accent);">Guide</span></span>
+        </div>
+        <p>Your ultimate guide to exploring the breathtaking landscapes, wildlife, culture, and cuisine of Kenya.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="attractions.html">Attractions</a></li>
+          <li><a href="food.html">Food & Dining</a></li>
+          <li><a href="accommodation.html">Stay</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Info</h4>
+        <ul>
+          <li><a href="#">Getting Here</a></li>
+          <li><a href="#">Visa Info</a></li>
+          <li><a href="#">Travel Tips</a></li>
+          <li><a href="#">Events Calendar</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Kenya Tourist Guide &nbsp;·&nbsp; Group 3 Project
+    </div>
+  </footer>
+</body>
+</html>

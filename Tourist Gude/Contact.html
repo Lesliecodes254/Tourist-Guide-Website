@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us — Kenya Tourist Guide</title>
+  <style>
+/* ===========================
+   CSS VARIABLES - Green & White Theme
+   =========================== */
+:root {
+  --primary: #1a6b3c;
+  --primary-dark: #0f4526;
+  --primary-light: #2d9e5f;
+  --accent: #4cc97a;
+  --accent-soft: #a8e6c1;
+  --white: #ffffff;
+  --off-white: #f4faf7;
+  --text-dark: #0d2b1a;
+  --text-mid: #2e5e42;
+  --text-light: #6aab86;
+  --border: #c2e8d2;
+  --shadow: rgba(26, 107, 60, 0.15);
+  --shadow-strong: rgba(26, 107, 60, 0.3);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Lato', 'Trebuchet MS', sans-serif;
+  --radius: 12px;
+  --transition: 0.3s ease;
+}
+
+/* ===========================
+   RESET & BASE
+   =========================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--off-white);
+  color: var(--text-dark);
+  line-height: 1.7;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+}
+
+/* ===========================
+   NAVIGATION — FLEXBOX
+   =========================== */
+nav {
+  background: var(--primary-dark);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 20px var(--shadow-strong);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 68px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.5px;
+}
+
+.nav-logo span {
+  color: var(--accent);
+}
+
+.nav-logo .logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--accent-soft);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background var(--transition), color var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background: var(--primary-light);
+  color: var(--white);
+}
+
+/* ===========================
+   HEADER / HERO
+   =========================== */
+.page-hero {
+  position: relative;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: var(--primary-dark);
+}
+
+.page-hero .hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.45;
+  transition: transform 0.6s ease;
+}
+
+.page-hero:hover .hero-bg { transform: scale(1.03); }
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: var(--white);
+  padding: 2rem;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  margin-bottom: 0.75rem;
+}
+
+.hero-content p {
+  font-size: 1.15rem;
+  color: var(--accent-soft);
+  max-width: 520px;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+}
+
+.hero-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--primary-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 0.35rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+/* ===========================
+   HOMEPAGE — ATTRACTION CARDS (CSS GRID)
+   =========================== */
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  color: var(--text-light);
+  font-size: 1.05rem;
+  margin-bottom: 2.5rem;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--accent);
+  margin-top: 0.5rem;
+  border-radius: 2px;
+}
+
+/* CSS Grid for attraction cards */
+.attractions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.75rem;
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 4px 20px var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+  border: 1px solid var(--border);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 36px var(--shadow-strong);
+}
+
+.card-img {
+  height: 200px;
+  background: var(--primary-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+}
+
+.card-tag {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: var(--accent);
+  color: var(--primary-dark);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.25rem 0.7rem;
+  border-radius: 20px;
+}
+
+.card-body {
+  padding: 1.4rem;
+}
+
+.card-body h3 {
+  font-size: 1.2rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+}
+
+.card-body p {
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+/* ===========================
+   TWO-COLUMN GRID (inner pages)
+   =========================== */
+.two-col-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+
+.two-col-grid.reverse {
+  direction: rtl;
+}
+
+.two-col-grid.reverse > * {
+  direction: ltr;
+}
+
+.col-image {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 8px 32px var(--shadow-strong);
+  aspect-ratio: 4/3;
+  background: var(--primary-light);
+}
+
+.col-image-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  background: linear-gradient(135deg, var(--primary-light), var(--accent));
+}
+
+.col-text {
+  padding: 1rem 0;
+}
+
+.col-text h2 {
+  font-size: 1.8rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+.col-text p {
+  color: var(--text-mid);
+  margin-bottom: 1rem;
+}
+
+.info-list {
+  list-style: none;
+  margin-top: 1.25rem;
+}
+
+.info-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.92rem;
+  color: var(--text-mid);
+}
+
+.info-list li:last-child { border-bottom: none; }
+
+.info-icon {
+  color: var(--accent);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+/* ===========================
+   PHOTO GALLERY (CSS GRID)
+   =========================== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  gap: 0.75rem;
+}
+
+.gallery-item {
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--primary-light);
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px var(--shadow-strong);
+  z-index: 2;
+  position: relative;
+}
+
+.gallery-item-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 2.5rem;
+  color: var(--white);
+}
+
+.gallery-item-placeholder span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.85;
+}
+
+/* Varying grid spans for visual interest */
+.gallery-item:nth-child(1) {
+  grid-column: span 2;
+  grid-row: span 2;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+}
+.gallery-item:nth-child(2) { background: linear-gradient(135deg, var(--primary-light), var(--accent)); }
+.gallery-item:nth-child(3) { background: linear-gradient(135deg, #2a7d50, var(--primary-light)); }
+.gallery-item:nth-child(4) { background: linear-gradient(135deg, var(--primary), #3aaf6a); }
+.gallery-item:nth-child(5) { background: linear-gradient(135deg, var(--accent), #2d9e5f); }
+.gallery-item:nth-child(6) {
+  grid-column: span 2;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+}
+.gallery-item:nth-child(7) { background: linear-gradient(135deg, var(--primary-light), var(--primary)); }
+.gallery-item:nth-child(8) { background: linear-gradient(135deg, #1d7a45, var(--accent)); }
+.gallery-item:nth-child(9) { background: linear-gradient(135deg, var(--primary), #44c273); }
+.gallery-item:nth-child(10) {
+  grid-column: span 2;
+  background: linear-gradient(135deg, var(--accent), var(--primary-dark));
+}
+.gallery-item:nth-child(11) { background: linear-gradient(135deg, var(--primary-dark), #2d9e5f); }
+.gallery-item:nth-child(12) { background: linear-gradient(135deg, var(--primary-light), var(--primary-dark)); }
+.gallery-item:nth-child(13) { background: linear-gradient(135deg, #2a7d50, var(--accent)); }
+.gallery-item:nth-child(14) { background: linear-gradient(135deg, var(--primary), var(--accent)); }
+.gallery-item:nth-child(15) { background: linear-gradient(135deg, var(--accent), var(--primary)); }
+.gallery-item:nth-child(16) { background: linear-gradient(135deg, var(--primary-dark), #3aaf6a); }
+.gallery-item:nth-child(17) { background: linear-gradient(135deg, #1d7a45, var(--primary-light)); }
+.gallery-item:nth-child(18) { background: linear-gradient(135deg, var(--primary-light), var(--primary-dark)); }
+.gallery-item:nth-child(19) { background: linear-gradient(135deg, var(--accent), #2a7d50); }
+.gallery-item:nth-child(20) { background: linear-gradient(135deg, var(--primary), var(--primary-light)); }
+
+/* ===========================
+   CONTACT FORM
+   =========================== */
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.contact-info h2 {
+  font-size: 2rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+.contact-info p {
+  color: var(--text-mid);
+  margin-bottom: 2rem;
+}
+
+.contact-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.contact-detail-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--accent-soft);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  color: var(--primary-dark);
+}
+
+.contact-detail-text strong {
+  display: block;
+  color: var(--primary-dark);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.2rem;
+}
+
+.contact-detail-text span {
+  color: var(--text-mid);
+  font-size: 0.95rem;
+}
+
+/* Form */
+.contact-form-box {
+  background: var(--white);
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 32px var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.contact-form-box h3 {
+  font-size: 1.5rem;
+  color: var(--primary-dark);
+  margin-bottom: 1.75rem;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  background: var(--off-white);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(45, 158, 95, 0.15);
+  background: var(--white);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 1rem;
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  margin-top: 0.5rem;
+}
+
+.btn-submit:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* ===========================
+   HOMEPAGE BANNER STATS
+   =========================== */
+.stats-bar {
+  background: var(--primary);
+  color: var(--white);
+  padding: 2.5rem 2rem;
+}
+
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--accent-soft);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.25rem;
+}
+
+/* ===========================
+   FOOTER
+   =========================== */
+footer {
+  background: var(--primary-dark);
+  color: var(--accent-soft);
+  padding: 3rem 2rem 1.5rem;
+  margin-top: 4rem;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.footer-brand p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-top: 0.75rem;
+  line-height: 1.7;
+}
+
+.footer-col h4 {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-col ul li a {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  transition: color var(--transition);
+}
+
+.footer-col ul li a:hover { color: var(--accent); }
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 1.25rem;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-light);
+}
+
+/* ===========================
+   UTILITY
+   =========================== */
+.bg-green-light {
+  background: var(--accent-soft);
+}
+
+.page-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.chip {
+  display: inline-block;
+  background: var(--accent-soft);
+  color: var(--primary-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.3rem 0.85rem;
+  border-radius: 20px;
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .two-col-grid,
+  .contact-wrapper,
+  .footer-inner { grid-template-columns: 1fr; }
+
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .gallery-item:nth-child(1),
+  .gallery-item:nth-child(6),
+  .gallery-item:nth-child(10) {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+
+  .nav-links { display: none; }
+}
+
+/* ===========================
+   IMAGE SLOTS
+   =========================== */
+.img-slot {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, #1a6b3c, #2d9e5f);
+  border: 3px dashed #4cc97a;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.img-slot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.img-slot .slot-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  z-index: 1;
+  pointer-events: none;
+}
+.img-slot .slot-icon { font-size: 2rem; }
+.img-slot .slot-text {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #a8e6c1;
+  background: rgba(15,69,38,0.7);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+}
+.img-slot .slot-name {
+  font-size: 0.65rem;
+  color: #4cc97a;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.gallery-img-slot {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border: 2px dashed rgba(76,201,122,0.6);
+  position: relative;
+  overflow: hidden;
+  color: #a8e6c1;
+}
+.gallery-img-slot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.gallery-img-slot .slot-label {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  pointer-events: none;
+}
+.gallery-img-slot .slot-icon { font-size: 1.8rem; }
+.gallery-img-slot .slot-text {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #a8e6c1;
+  background: rgba(15,69,38,0.75);
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+}
+.gallery-img-slot .slot-name { font-size: 0.6rem; color: #4cc97a; }
+
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <div class="logo-icon">🇰🇪</div>
+        <span>Kenya<span>Guide</span></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="attractions.html" >Attractions</a></li>
+        <li><a href="food.html" >Food & Dining</a></li>
+        <li><a href="accommodation.html" >Stay</a></li>
+        <li><a href="gallery.html" >Gallery</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1600');"></div>
+    <div class="hero-content">
+      <div class="hero-badge">Get in Touch</div>
+      <h1>Contact Us</h1>
+      <p>Have questions about visiting Kenya? Our team is here to help you plan the perfect Kenyan adventure.</p>
+    </div>
+  </header>
+
+  <div class="page-wrap">
+    <div class="contact-wrapper">
+
+      <div class="contact-info">
+        <p class="chip">Reach Out</p>
+        <h2>We'd Love to Hear From You</h2>
+        <p>Whether you need help planning a safari, have questions about visa requirements, or want recommendations for your itinerary — we're ready to assist.</p>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📍</div>
+          <div class="contact-detail-text">
+            <strong>Visit Us</strong>
+            <span>Kenya Tourism Board<br>Lonrho House, Standard Street<br>Nairobi, Kenya</span>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📞</div>
+          <div class="contact-detail-text">
+            <strong>Call Us</strong>
+            <span>+254 020 271 3348<br>Mon–Fri: 8:00 AM – 5:00 PM EAT</span>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">✉️</div>
+          <div class="contact-detail-text">
+            <strong>Email Us</strong>
+            <span>info@kenyaguide.co.ke<br>Response within 24 hours</span>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">🕘</div>
+          <div class="contact-detail-text">
+            <strong>Office Hours</strong>
+            <span>Mon – Fri: 8:00 AM – 5:00 PM EAT<br>Sat: 9:00 AM – 1:00 PM EAT</span>
+          </div>
+        </div>
+
+        <div style="margin-top:2rem;border-radius:var(--radius);overflow:hidden;border:2px solid var(--border);height:200px;background:linear-gradient(135deg,var(--primary),var(--primary-light));display:flex;align-items:center;justify-content:center;color:var(--white);flex-direction:column;gap:0.5rem;">
+          <span style="font-size:2.5rem;">🗺️</span>
+          <span style="font-weight:700;font-size:0.9rem;text-transform:uppercase;letter-spacing:1px;">Nairobi, Kenya</span>
+          <span style="font-size:0.8rem;opacity:0.8;">Lonrho House, Standard Street</span>
+        </div>
+      </div>
+
+      <div class="contact-form-box">
+        <h3>Send Us a Message</h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" placeholder="e.g. Amina"/>
+          </div>
+          <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" placeholder="e.g. Wanjiku"/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="amina.wanjiku@example.com"/>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number (Optional)</label>
+          <input type="tel" id="phone" placeholder="+254 7XX XXX XXX"/>
+        </div>
+
+        <div class="form-group">
+          <label for="topic">Topic</label>
+          <select id="topic">
+            <option value="" disabled selected>Select a topic…</option>
+            <option>Safari Planning</option>
+            <option>Beach Holiday Advice</option>
+            <option>Visa &amp; Entry Requirements</option>
+            <option>Accommodation Recommendations</option>
+            <option>Transport &amp; Getting Around</option>
+            <option>Cultural Experiences</option>
+            <option>Group Tours</option>
+            <option>Feedback &amp; Suggestions</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="visit-date">Planned Visit Date (Optional)</label>
+          <input type="date" id="visit-date"/>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Your Message</label>
+          <textarea id="message" placeholder="Tell us how we can help you plan your Kenyan adventure…"></textarea>
+        </div>
+
+        <div class="form-group" style="display:flex;align-items:center;gap:0.75rem;">
+          <input type="checkbox" id="newsletter" style="width:auto;accent-color:var(--primary);"/>
+          <label for="newsletter" style="font-size:0.9rem;text-transform:none;letter-spacing:0;color:var(--text-mid);font-weight:400;">Subscribe to the Kenya Guide newsletter for travel tips, safari news, and exclusive deals</label>
+        </div>
+
+        <button class="btn-submit" type="button">Send Message ✉️</button>
+        <p style="text-align:center;font-size:0.8rem;color:var(--text-light);margin-top:1rem;">We typically respond within 24 hours on business days.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="background:var(--white);padding:4rem 2rem;border-top:1px solid var(--border);">
+    <div style="max-width:800px;margin:0 auto;">
+      <p class="chip" style="display:block;text-align:center;">FAQ</p>
+      <h2 class="section-title" style="text-align:center;margin:0 auto 2rem;">Common Questions</h2>
+      <div style="display:grid;gap:1rem;">
+        <div style="padding:1.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--off-white);">
+          <h4 style="color:var(--primary-dark);margin-bottom:0.5rem;">🛂 Do I need a visa to visit Kenya?</h4>
+          <p style="font-size:0.92rem;color:var(--text-mid);">Kenya offers an eVisa for most nationalities, applied for online before travel. East African Community citizens (Uganda, Tanzania, Rwanda, Burundi, South Sudan) enjoy visa-free entry. Check the eCitizen portal for current requirements.</p>
+        </div>
+        <div style="padding:1.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--off-white);">
+          <h4 style="color:var(--primary-dark);margin-bottom:0.5rem;">🌦️ What is the best time to visit Kenya?</h4>
+          <p style="font-size:0.92rem;color:var(--text-mid);">Kenya is a year-round destination. The dry seasons (Jan–Feb and Jun–Oct) are best for wildlife viewing and the Great Migration. The coastal beaches are beautiful all year, with the coolest and driest conditions from Jun–Aug.</p>
+        </div>
+        <div style="padding:1.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--off-white);">
+          <h4 style="color:var(--primary-dark);margin-bottom:0.5rem;">🚌 How do I get around Kenya?</h4>
+          <p style="font-size:0.92rem;color:var(--text-mid);">Domestic flights connect Nairobi to the Mara, Mombasa, Malindi, and other destinations quickly. Matatus (minibuses) and buses serve intercity routes affordably. For safaris, most lodges organise transfers from Nairobi or the nearest airstrip.</p>
+        </div>
+        <div style="padding:1.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--off-white);">
+          <h4 style="color:var(--primary-dark);margin-bottom:0.5rem;">💳 What currency does Kenya use?</h4>
+          <p style="font-size:0.92rem;color:var(--text-mid);">Kenya uses the Kenyan Shilling (KSh). M-Pesa mobile money is widely accepted. Major hotels and tourist facilities accept credit cards. It's worth carrying some cash for local markets, matatus, and smaller establishments.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:0.75rem;">
+          <div class="logo-icon">🇰🇪</div>
+          <span style="color:var(--white);">Kenya<span style="color:var(--accent);">Guide</span></span>
+        </div>
+        <p>Your ultimate guide to exploring the breathtaking landscapes, wildlife, culture, and cuisine of Kenya.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="attractions.html">Attractions</a></li>
+          <li><a href="food.html">Food & Dining</a></li>
+          <li><a href="accommodation.html">Stay</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Info</h4>
+        <ul>
+          <li><a href="#">Getting Here</a></li>
+          <li><a href="#">Visa Info</a></li>
+          <li><a href="#">Travel Tips</a></li>
+          <li><a href="#">Events Calendar</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Kenya Tourist Guide &nbsp;·&nbsp; Group 3 Project
+    </div>
+  </footer>
+</body>
+</html>
